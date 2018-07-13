@@ -12,5 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('user.posts.posts');
+});
+
+Route::get('admin/home', function () {
+  return view('admin.home');
 });
