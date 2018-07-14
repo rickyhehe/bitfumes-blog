@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 
 @section('content-title')
-    Posts data
+    Tag data
 @endsection
 
 @section('content-body')

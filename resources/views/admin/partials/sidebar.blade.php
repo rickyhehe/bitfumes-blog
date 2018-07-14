@@ -12,10 +12,15 @@
           <a href="todo.html"><i class="fi-layers"></i> <span> Dashboard </span></a>
         </li>
         <li>
-          <a href="todo.html"><i class="fi-layers"></i> <span> Posts </span></a>
+          <a href="{{ route('admin.post.index') }}"><i class="fi-layers"></i> <span> Posts </span></a>
         </li>
-        
         <li>
+          <a href="{{ route('admin.tag.index') }}"><i class="fi-layers"></i> <span> Tag </span></a>
+        </li>
+        <li>
+          <a href="{{ route('admin.category.index') }}"><i class="fi-layers"></i> <span> Category </span></a>
+        </li>
+        {{-- <li>
           <a href="javascript: void(0);"><i class="fi-target"></i> <span> Admin UI </span> <span class="menu-arrow"></span></a>
           <ul class="nav-second-level" aria-expanded="false">
             <li><a href="admin-grid.html">Grid</a></li>
@@ -30,7 +35,7 @@
             <li><a href="admin-slider.html">Slider</a></li>
             <li><a href="admin-treeview.html">Treeview</a></li>
           </ul>
-        </li>
+        </li> --}}
       </ul>
       
     </div>
