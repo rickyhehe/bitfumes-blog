@@ -23,6 +23,6 @@ Route::group(['namespace' => 'admin','prefix' => 'admin'], function () {
 
 
 
-// Route::get('admin/post/create', function () {
-//   return view('admin.post.post');
-// });
+Route::get('test', function () {
+  echo str_slug("halo nama saya","-");
+});
