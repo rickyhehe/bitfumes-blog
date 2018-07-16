@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\user\tag;
 
 class TagController extends Controller
 {
@@ -13,8 +14,9 @@ class TagController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view("admin.tag.index");
+    { 
+      $tags=tag::all();
+      return view("admin.tag.index",compact("tags"));
     }
 
     /**
@@ -24,7 +26,7 @@ class TagController extends Controller
      */
     public function create()
     {
-      return view("admin.category.form");      
+      return view("admin.tag.form");      
     }
 
     /**
@@ -35,7 +37,15 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $this->validate($request,[
+        "name" => "required"
+      ]);
+      $tag = new tag;
+      $tag->name = $request->name;
+      $tag->slug = str_slug($request->name,"-");
+      $tag->save();
+
+      return redirect()->route("admin.tag.index");
     }
 
     /**

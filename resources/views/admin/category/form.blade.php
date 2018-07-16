@@ -6,12 +6,13 @@ Create Category
 
 @section('content-body')
 <div class="card-box">
-  <p class="text-muted m-b-20 font-13"></p>
-    <form role="form" action="">
+  @include('admin.partials.messages')
+    <form action="{{ route('admin.category.store') }}" method="POST">
       <div class="form-group">
         <label>Name</label>
         <input type="text" class="form-control" id="categoryName" name="name" value="@yield('name-value')">
       </div>
+      {{ csrf_field() }}
       @yield('form-method')
       <button type="submit" class="btn btn-purple waves-effect waves-light">Submit</button>
     </form>

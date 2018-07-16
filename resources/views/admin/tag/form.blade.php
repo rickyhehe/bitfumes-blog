@@ -6,12 +6,13 @@ Create Tag
 
 @section('content-body')
 <div class="card-box">
-  <p class="text-muted m-b-20 font-13"></p>
-    <form role="form">
+  @include('admin.partials.messages')
+    <form role="form" action="{{ route('admin.tag.store') }}" method="POST">
       <div class="form-group">
         <label>Name</label>
         <input type="text" class="form-control" id="tagName" name="name" value="@yield('name-value')">
       </div>
+      {{ csrf_field() }}
       @yield('form-method')
       <button type="submit" class="btn btn-purple waves-effect waves-light">Submit</button>
     </form>

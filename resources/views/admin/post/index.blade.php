@@ -10,7 +10,6 @@
 
 @section('content-body')
 <div class="card-box table-responsive">
-  <p class="text-muted m-b-20 font-13"></p>
   <a href="{{ route('admin.post.create') }}" class="btn btn-info">Add New</a>
   <hr>
   <table class="table table-striped table-bordered table-datatable">

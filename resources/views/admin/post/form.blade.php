@@ -7,7 +7,6 @@ Create Post
 @section('content-body')
 <div class="card-box">
   @include('admin.partials.messages')
-  <p class="text-muted m-b-20 font-13"></p>
     <form method="post" action="{{ route('admin.post.store') }}">
       <div class="form-group">
         <label>Title</label>
