@@ -90,6 +90,8 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $tag = tag::find($id);
+      $tag->delete();
+      return redirect()->route('admin.tag.index')->with("messages","data has been deleted");
     }
 }
