@@ -27,7 +27,7 @@ Tag data
         <td>{{ $loop->index +1 }}</td>
         <td>{{ $tag->name }}</td>
         <td>
-          <button class="btn btn-success">E</button>  
+          <a class="btn btn-success" href="{{ route('admin.tag.edit',$tag->id) }}">E</a>  
           <button value="{{ route('admin.tag.destroy',$tag->id) }}" class="btn btn-danger btn-modal-confirm">D</button>  
         </td>
       </tr>
