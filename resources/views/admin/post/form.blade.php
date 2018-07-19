@@ -1,5 +1,7 @@
 @extends('admin.layouts.main')
-
+@section('head')
+<link rel="stylesheet" href="{{ asset('adminox/plugins/select2/css/select2.min.css') }}"> 
+@endsection
 @section('content-title')
 Create Post
 @endsection
@@ -15,6 +17,41 @@ Create Post
       <div class="form-group">
         <label>Image</label>
         <input type="file" class="form-control" name="image">
+      </div>
+
+      <div class="form-group">
+          <label>Category</label>
+          <select class="form-control" name="category">
+            @foreach ($categories as $category)
+              @if (isset($post->category_id) )
+                <option value="{{ $category->id }}" 
+                @if ($category->id == $post->category_id) selected  @endif>
+                {{ $category->name }}</option>
+              @else
+                <option value="{{ $category->id }}" >{{ $category->name }}</option>   
+              @endif
+              
+            @endforeach
+        </select>
+      </div>
+
+      <div class="form-group">
+          <label>Tag</label>
+          <select class="select2 form-control select2-multiple select2-hidden-accessible" multiple="" data-placeholder="Choose ..." tabindex="-1" aria-hidden="true" name="tags[]">
+            @foreach ($tags as $tag)
+              @if (isset($post) )
+              <option value="{{ $tag->id }}" 
+                @foreach ($post->tags as $postTag)
+                  @if ($tag->id == $postTag->id) selected  @endif
+                  
+                @endforeach
+              >{{ $tag->name }}
+              </option>
+              @else
+                <option value="{{ $tag->id }}" >{{ $tag->name }}</option>   
+              @endif
+            @endforeach
+        </select>
       </div>
       <div class="form-group">
         <div class="checkbox checkbox-primary">
@@ -44,8 +81,11 @@ Create Post
 @endsection
 @section('foot')
 <script src="{{ asset('adminox/plugins/tinymce/tinymce.min.js') }}"></script>
+<script src="{{ asset('adminox/plugins/select2/js/select2.min.js') }}"></script>
 <script type="text/javascript">
   $(document).ready(function () {
+    $('.select2-multiple').select2();
+
     tinymce.init({
       selector: "textarea#elm1",
       theme: "modern",

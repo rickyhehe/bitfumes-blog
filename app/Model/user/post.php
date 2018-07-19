@@ -8,6 +8,6 @@ class post extends Model
 {
     public function tags()
     {
-      return $this->belongsToMany('App\Model\user\tag');
+      return $this->belongsToMany('App\Model\user\tag')->withTimestamps();
     }
 }

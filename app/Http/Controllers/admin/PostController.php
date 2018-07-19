@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\user\post;
+use App\Model\user\category;
+use App\Model\user\tag;
 
 class PostController extends Controller
 {
@@ -26,7 +28,9 @@ class PostController extends Controller
      */
     public function create()
     {
-      return view('admin.post.form');
+      $categories = category::all();
+      $tags = tag::all();
+      return view('admin.post.form',compact('categories','tags'));
     }
 
     /**
@@ -37,7 +41,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-      // die(print_r($request->all()));
+      // die(print_r($request->tags));
       $this->validate($request,[
         'title' => 'required',
         'body' => 'required'
@@ -47,7 +51,12 @@ class PostController extends Controller
       $post->body = $request->body;
       $post->slug = str_slug($request->title,"-");
       $post->status = $request->status;
+      $post->category_id = $request->category;
+      $post->posted_by = 1;
+      $post->image = 1;
       $post->save();
+      
+      $post->tags()->sync($request->tags);
       return redirect(route("admin.post.index"));
     }
 
@@ -70,8 +79,11 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = post::find($id);
-        return view("admin.post.edit",compact("post"));
+        $categories = category::all();
+        $tags = tag::all();
+        $post = post::with('tags')->find($id);
+        // return $post;
+        return view("admin.post.edit",compact("post","categories","tags"));
     }
 
     /**
@@ -93,6 +105,8 @@ class PostController extends Controller
       $post->body = $request->body;
       $post->slug = str_slug($request->title,"-");
       $post->status = $request->status;
+      $post->category_id = $request->category;
+      $post->tags()->sync($request->tags);
       $post->save();
       return redirect()->route("admin.post.index")->with("messages","post has been updated");
     }

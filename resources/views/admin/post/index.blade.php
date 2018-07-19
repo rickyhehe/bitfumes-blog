@@ -20,8 +20,6 @@
         <th>Title</th>
         <th>Status</th>
         <th>Posted By</th>
-        <th>Created By</th>
-        <th>Updated By</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -31,8 +29,6 @@
         <td>{{ $loop->index +1 }}</td>
         <td>{{ $post->title }}</td>
         <td>{{ $post->status }}</td>
-        <td>{{ $post->posted_by }}</td>
-        <td>{{ $post->created_by }}</td>
         <td>{{ $post->updated_by }}</td>
         <td>
           <a class="btn btn-success" href="{{ route("admin.post.edit",$post->id) }}">E</a>

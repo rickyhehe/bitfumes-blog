@@ -22,6 +22,7 @@
   @endif
 @endsection
 
+
 @section('body-value')
     {{ $post->body }}
 @endsection
