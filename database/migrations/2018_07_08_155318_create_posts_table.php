@@ -21,6 +21,7 @@ class CreatePostsTable extends Migration
             $table->boolean('status');
             $table->integer('posted_by');
             $table->string('image');
+            $table->integer('category_id');
             $table->timestamps();
         });
     }
