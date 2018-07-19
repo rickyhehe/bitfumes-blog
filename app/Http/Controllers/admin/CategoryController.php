@@ -68,7 +68,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+      $category = category::find($id);
+      return view("admin.category.edit",compact('category'));
     }
 
     /**
@@ -80,7 +81,16 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $this->validate($request,[
+        'name' => 'required'
+      ]);
+
+      $category = category::find($id);
+      $category->name = $request->name;
+      $category->slug = str_slug($request->name,"-");
+      $category->save();
+
+      return redirect()->route('admin.category.index')->with("messages","category has been updated");
     }
 
     /**
@@ -91,6 +101,10 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = category::find($id);
+        $category->delete();
+
+        return redirect()->route('admin.category.index')->with("messages","category has been deleted");
+
     }
 }

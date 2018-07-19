@@ -7,7 +7,7 @@ Create Category
 @section('content-body')
 <div class="card-box">
   @include('admin.partials.messages')
-    <form action="{{ route('admin.category.store') }}" method="POST">
+    <form action="@yield("form-action",route('admin.category.store'))" method="POST">
       <div class="form-group">
         <label>Name</label>
         <input type="text" class="form-control" id="categoryName" name="name" value="@yield('name-value')">

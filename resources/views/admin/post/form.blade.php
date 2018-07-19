@@ -7,7 +7,7 @@ Create Post
 @section('content-body')
 <div class="card-box">
   @include('admin.partials.messages')
-    <form method="post" action="{{ route('admin.post.store') }}">
+    <form method="post" action="@yield("form-action",route('admin.post.store'))">
       <div class="form-group">
         <label>Title</label>
         <input type="text" class="form-control" id="postTitle" name="title" value="@yield('title-value')">
@@ -18,7 +18,7 @@ Create Post
       </div>
       <div class="form-group">
         <div class="checkbox checkbox-primary">
-          <input id="postStatus" type="checkbox" name="status" value="1">
+          <input id="postStatus" type="checkbox" name="status" value="1" @yield("status-value")>
           <label for="postStatus">
             Publish
           </label>
