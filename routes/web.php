@@ -10,8 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['namespace' => 'user','prefix' => 'user'], function () {
-  Route::get('/', 'HomeController@index');
+Route::group(['namespace' => 'user'], function () {
+  Route::get('post', 'PostController@index')->name("post");
+  Route::get('post/{post}', 'PostController@single')->name("post.single");
+  // Route::get('/', 'HomeController@index');
 });
 
 Route::group(['namespace' => 'admin','prefix' => 'admin'], function () {

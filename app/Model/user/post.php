@@ -10,4 +10,12 @@ class post extends Model
     {
       return $this->belongsToMany('App\Model\user\tag')->withTimestamps();
     }
+    public function category()
+    {
+      return $this->belongsTo("App\Model\user\category");
+    }
+    public function getRouteKeyName()
+    {
+      return "slug";
+    }
 }
