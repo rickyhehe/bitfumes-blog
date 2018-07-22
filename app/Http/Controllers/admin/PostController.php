@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Model\user\post;
 use App\Model\user\category;
 use App\Model\user\tag;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -46,6 +47,14 @@ class PostController extends Controller
         'title' => 'required',
         'body' => 'required'
       ]);
+      if ($request->hasFile("image")) {
+        $fileName = time()."-".$request->file('image')->getClientOriginalName();
+        $path = $request->file('image')->storeAs("public/upload",$fileName);
+        // return $fileName;
+      }
+      else {
+        $fileName = "noimage.jpg";
+      }
       $post = new post;
       $post->title = $request->title;
       $post->body = $request->body;
@@ -53,7 +62,7 @@ class PostController extends Controller
       $post->status = $request->status;
       $post->category_id = $request->category;
       $post->posted_by = 1;
-      $post->image = 1;
+      $post->image = $fileName;
       $post->save();
       
       $post->tags()->sync($request->tags);
@@ -100,11 +109,23 @@ class PostController extends Controller
         'title' => 'required',
         'body' => 'required'
       ]);
+      if ($request->hasFile("image")) {
+        if ($request->oldimage != 'noimage.jpg') {
+          Storage::delete("public/upload/$request->oldimage");
+        }
+        $fileName = time()."-".$request->file('image')->getClientOriginalName();
+        $path = $request->file('image')->storeAs("public/upload",$fileName);
+        // return $fileName;
+      }
+      else{
+        $fileName = $request->oldimage;
+      }
       $post = post::find($id);
       $post->title = $request->title;
       $post->body = $request->body;
       $post->slug = str_slug($request->title,"-");
       $post->status = $request->status;
+      $post->image = $fileName;
       $post->category_id = $request->category;
       $post->tags()->sync($request->tags);
       $post->save();
@@ -121,6 +142,9 @@ class PostController extends Controller
     {
       $post = post::find($id);
       $post->delete();
+      if ($post->image != 'noimage.jpg') {
+        Storage::delete("public/upload/$post->image");
+      }
       return redirect()->route("admin.post.index")->with("messages","post has been deleted");
       
     }

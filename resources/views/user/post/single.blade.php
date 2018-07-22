@@ -7,10 +7,12 @@
   <hr>
   <div class="row">
     <div class="col-md-8">
+      <img src="{{ asset("storage/upload/{$post->image}") }}" alt="" width="100px">
+      <br>
       <span>in <b>{{ ($post->category !=  null ) ? "{$post->category->name}" : "not set" }}</b></span>
       <small>{{ $post->created_at->diffForHumans() }}</small>
       <p>
-        {{ $post->body }}
+        {!! $post->body !!}
       </p>
       @foreach ($post->tags as $tag)
         <span class="badge badge-secondary">{{ $tag->name }}</span>

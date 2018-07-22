@@ -9,7 +9,7 @@ Create Post
 @section('content-body')
 <div class="card-box">
   @include('admin.partials.messages')
-    <form method="post" action="@yield("form-action",route('admin.post.store'))">
+    <form method="post" action="@yield("form-action",route('admin.post.store'))" enctype="multipart/form-data">
       <div class="form-group">
         <label>Title</label>
         <input type="text" class="form-control" id="postTitle" name="title" value="@yield('title-value')">
@@ -18,7 +18,9 @@ Create Post
         <label>Image</label>
         <input type="file" class="form-control" name="image">
       </div>
-
+      @section('custom-input')
+          
+      @show
       <div class="form-group">
           <label>Category</label>
           <select class="form-control" name="category">

@@ -22,6 +22,9 @@
   @endif
 @endsection
 
+@section('custom-input')
+  <input type="hidden" name="oldimage" value="{{ $post->image }}">
+@endsection
 
 @section('body-value')
     {{ $post->body }}
