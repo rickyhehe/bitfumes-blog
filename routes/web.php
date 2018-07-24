@@ -21,6 +21,11 @@ Route::group(['namespace' => 'admin','prefix' => 'admin'], function () {
   Route::resource('post', 'PostController',['as'=>'admin']);
   Route::resource('tag', 'TagController',['as'=>'admin']);
   Route::resource('category', 'CategoryController',['as'=>'admin']);
+
+  // Authentication Routes...
+  Route::get('login', 'Auth\LoginController@showLoginForm')->name('admin.login');
+  Route::post('login', 'Auth\LoginController@login');
+  Route::post('logout', 'Auth\LoginController@logout')->name('admin.logout');
 });
 
 
