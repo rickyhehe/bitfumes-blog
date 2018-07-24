@@ -28,3 +28,7 @@ Route::group(['namespace' => 'admin','prefix' => 'admin'], function () {
 Route::get('test', function () {
   echo str_slug("halo nama saya","-");
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
