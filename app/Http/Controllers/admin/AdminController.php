@@ -4,8 +4,9 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\admin\admin;
 
-class UserController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+       $admins = admin::all();
+       return view('admin.admin.index',compact('admins'));
     }
 
     /**
@@ -24,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+      return view('admin.admin.form');      
     }
 
     /**

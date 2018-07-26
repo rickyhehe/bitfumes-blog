@@ -16,13 +16,14 @@ Route::group(['namespace' => 'user'], function () {
   // Route::get('/', 'HomeController@index');
 });
 
-Route::group(['namespace' => 'admin','prefix' => 'admin'], function () {
-  Route::resource('user', 'UserController',['as'=>'admin']);
+Route::group( ['namespace' => 'admin', 'prefix' => 'admin', 'middleware' => ['auth:admin']], function () {
+  Route::resource('admin', 'AdminController',['as'=>'admin']);
   Route::resource('post', 'PostController',['as'=>'admin']);
   Route::resource('tag', 'TagController',['as'=>'admin']);
   Route::resource('category', 'CategoryController',['as'=>'admin']);
-
-  // Authentication Routes...
+});
+Route::group( ['namespace' => 'admin', 'prefix' => 'admin'], function () {
+  // Authentication Routes..
   Route::get('login', 'Auth\LoginController@showLoginForm')->name('admin.login');
   Route::post('login', 'Auth\LoginController@login');
   Route::post('logout', 'Auth\LoginController@logout')->name('admin.logout');
