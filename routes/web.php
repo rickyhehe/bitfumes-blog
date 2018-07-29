@@ -21,6 +21,7 @@ Route::group( ['namespace' => 'admin', 'prefix' => 'admin', 'middleware' => ['au
   Route::resource('post', 'PostController',['as'=>'admin']);
   Route::resource('tag', 'TagController',['as'=>'admin']);
   Route::resource('category', 'CategoryController',['as'=>'admin']);
+  Route::resource('role', 'RoleController',['as'=>'admin']);
 });
 Route::group( ['namespace' => 'admin', 'prefix' => 'admin'], function () {
   // Authentication Routes..

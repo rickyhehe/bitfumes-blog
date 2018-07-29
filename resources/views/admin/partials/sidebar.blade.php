@@ -20,9 +20,15 @@
         <li>
           <a href="{{ route('admin.category.index') }}"><i class="fi-layers"></i> <span> Category </span></a>
         </li>
+
+        <li class="menu-title">Admin Management</li>     
         
         <li>
           <a href="{{ route('admin.admin.index') }}"><i class="fi-layers"></i> <span> Admin </span></a>
+        </li>
+        
+        <li>
+          <a href="{{ route('admin.role.index') }}"><i class="fi-layers"></i> <span> Role </span></a>
         </li>
         {{-- <li>
           <a href="javascript: void(0);"><i class="fi-target"></i> <span> Admin UI </span> <span class="menu-arrow"></span></a>
