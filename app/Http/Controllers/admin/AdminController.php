@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\admin\admin;
+use App\Model\admin\role;
 
 class AdminController extends Controller
 {
@@ -26,7 +27,8 @@ class AdminController extends Controller
      */
     public function create()
     {
-      return view('admin.admin.form');      
+      $roles = role::all();
+      return view('admin.admin.form',compact('roles'));      
     }
 
     /**
@@ -37,7 +39,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      return $request->all();
     }
 
     /**

@@ -30,6 +30,9 @@
         <li>
           <a href="{{ route('admin.role.index') }}"><i class="fi-layers"></i> <span> Role </span></a>
         </li>
+        <li>
+          <a href="{{ route('admin.permission.index') }}"><i class="fi-layers"></i> <span> Permission </span></a>
+        </li>
         {{-- <li>
           <a href="javascript: void(0);"><i class="fi-target"></i> <span> Admin UI </span> <span class="menu-arrow"></span></a>
           <ul class="nav-second-level" aria-expanded="false">

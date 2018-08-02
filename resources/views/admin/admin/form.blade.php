@@ -24,13 +24,17 @@ Create Tag
         <label>Confirm Password</label>
         <input type="password" class="form-control" id="cpassword" name="cpassword">
       </div>
-      <div class="form-group">
-        <label>Role</label>
-        <select name="role" class="form-control" id="">
-          <option value="0">Writer</option>
-          <option value="1">Editor</option>
-          <option value="2">Publisher</option>
-        </select>
+      <div class="form-group row">
+        <label class="col-md-12">Assign Role</label>
+        @foreach ($roles as $role)
+          <div class="col-md-3">
+              <input type="checkbox" name="role[]" value="{{ $role->id }}">
+              <label >
+                  {{ $role->name }}
+              </label>
+          </div>
+        @endforeach
+        
       </div>
       {{ csrf_field() }}
       @yield('form-method')
