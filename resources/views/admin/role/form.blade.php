@@ -16,7 +16,12 @@ Create role
         <div class="col-md-12">Permission</div>
         @foreach ($permissions as $perm)
         <div class="col-md-3">
-            <input type="checkbox" name="permissions[]" value="{{ $perm->id }}">
+            <input type="checkbox" name="permissions[]" value="{{ $perm->id }}"
+            @if (isset($role->permissions))
+            @foreach ($role->permissions as $rolePerm)
+              @if ($rolePerm->id == $perm->id) checked @endif
+            @endforeach
+            @endif>
             <label >
                 {{ $perm->name }}
             </label>

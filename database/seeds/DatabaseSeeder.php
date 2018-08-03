@@ -14,13 +14,13 @@ class DatabaseSeeder extends Seeder
         // $this->call(PostSeeder::class);
         $this->call(PermissionSeeder::class);
 
-        DB::table('roles')->insert([
-          ["name"=>"author"], 
-          ["name"=>"editor"], 
-          ["name"=>"publisher"], 
-          ["name"=>"admin"]
-        ]
-        );
+        // DB::table('roles')->insert([
+        //   ["name"=>"author"], 
+        //   ["name"=>"editor"], 
+        //   ["name"=>"publisher"], 
+        //   ["name"=>"admin"]
+        // ]
+        // );
         DB::table('categories')->insert([
           ["name"=>"category1","slug"=>str_slug("category1")], 
           ["name"=>"category2","slug"=>str_slug("category2")], 

@@ -71,8 +71,9 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-      $role = role::find($id);
       $permissions = permission::all();
+      $role = role::with('permissions')->find($id);
+      // return $role;
       return view("admin.role.edit",compact('role','permissions'));
     }
 
@@ -91,7 +92,7 @@ class RoleController extends Controller
         ]);
         $role = role::find($id);
         $role->name = $request->name;
-        $role->permission()->sync($request->permission);
+        $role->permissions()->sync($request->permission);
         $role->save();
   
         return redirect()->route('admin.role.index')->with('messages','Data has been updated');
