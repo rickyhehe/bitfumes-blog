@@ -39,6 +39,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+      // return $request->all();
         $this->validate($request,[
           "name"=>"required"
         ]);
@@ -46,6 +47,8 @@ class RoleController extends Controller
         $role = new role;
         $role->name = $request->name;
         $role->save();
+
+        $role->permissions()->sync($request->permissions);
         return redirect()->route('admin.role.index');
     }
 
@@ -69,7 +72,8 @@ class RoleController extends Controller
     public function edit($id)
     {
       $role = role::find($id);
-      return view("admin.role.edit",compact('role'));
+      $permissions = permission::all();
+      return view("admin.role.edit",compact('role','permissions'));
     }
 
     /**
@@ -87,6 +91,7 @@ class RoleController extends Controller
         ]);
         $role = role::find($id);
         $role->name = $request->name;
+        $role->permission()->sync($request->permission);
         $role->save();
   
         return redirect()->route('admin.role.index')->with('messages','Data has been updated');

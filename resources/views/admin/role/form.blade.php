@@ -15,8 +15,8 @@ Create role
       <div class="form-group row">
         <div class="col-md-12">Permission</div>
         @foreach ($permissions as $perm)
-        <div class="col-md-3" style="border-right: 1px gray solid">
-            <input type="checkbox" name="role[]" value="{{ $perm->id }}">
+        <div class="col-md-3">
+            <input type="checkbox" name="permissions[]" value="{{ $perm->id }}">
             <label >
                 {{ $perm->name }}
             </label>
