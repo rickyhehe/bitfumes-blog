@@ -11,7 +11,10 @@
 @section('content-body')
 <div class="card-box table-responsive">
     @include('admin.partials.messages')
-  <a href="{{ route('admin.post.create') }}" class="btn btn-info">Add New</a>
+  @can('posts.create', Auth::user())
+    <a href="{{ route('admin.post.create') }}" class="btn btn-info">Add New</a>
+  @endcan  
+    
   <hr>
   <table class="table table-striped table-bordered table-datatable">
     <thead>
@@ -31,8 +34,13 @@
         <td>{{ $post->status }}</td>
         <td>{{ $post->updated_by }}</td>
         <td>
-          <a class="btn btn-success" href="{{ route("admin.post.edit",$post->id) }}">E</a>
-          <button value="{{ route('admin.post.destroy',$post->id) }}" class="btn btn-danger btn-modal-confirm">D</button>
+          @can('posts.update', Auth::user())
+            <a class="btn btn-success" href="{{ route("admin.post.edit",$post->id) }}">E</a>
+          @endcan
+          @can('posts.delete', Auth::user())
+            <button value="{{ route('admin.post.destroy',$post->id) }}" class="btn btn-danger btn-modal-confirm">D</button>
+          @endcan
+          
         </td>
       </tr>
       @endforeach
