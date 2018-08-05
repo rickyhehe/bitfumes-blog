@@ -19,6 +19,7 @@ Admin data
         <th>No</th>
         <th>Name</th>
         <th>Email</th>
+        <th>Role</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -28,6 +29,11 @@ Admin data
         <td>{{ $loop->index +1 }}</td>
         <td>{{ $admin->name }}</td>
         <td>{{ $admin->email }}</td>
+        <td>
+          @foreach ($admin->roles as $role)
+              {{ $role->name }},
+          @endforeach  
+        </td>
         <td>
           <a class="btn btn-success" href="{{ route('admin.admin.edit',$admin->id) }}">E</a>  
           <button value="{{ route('admin.admin.destroy',$admin->id) }}" class="btn btn-danger btn-modal-confirm">D</button>  

@@ -85,7 +85,7 @@
                     onclick="event.preventDefault();document.getElementById('logout-form').submit()">
                         <i class="zmdi zmdi-power"></i> <span>Logout</span>
                     </a>
-                    <form action="{{ route('logout') }}" method="POST" id="logout-form"> 
+                    <form action="{{ route('admin.logout') }}" method="POST" id="logout-form"> 
                       @csrf
                     </form>
                 </div>

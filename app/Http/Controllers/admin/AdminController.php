@@ -39,7 +39,22 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-      return $request->all();
+      $this->validate($request,[
+        "name" => "required",
+        "email" => "required|email|unique:admins",
+        "role" => "required"
+
+      ]);
+      $admin = new admin();
+      $admin->name = $request->name;
+      $admin->email = $request->email;
+      $admin->password = bcrypt($request->email);
+      $admin->status = 1;
+      $admin->phone ="000";
+
+      $admin->save();
+      $admin->roles()->sync($request->role);
+      return redirect()->route("admin.admin.index")->with("messages","new admin has been created");
     }
 
     /**
@@ -50,7 +65,7 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -61,7 +76,9 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+      $roles = role::all();
+      $admin = admin::find($id);
+      return view('admin.admin.edit',compact('admin','roles'));  
     }
 
     /**
@@ -73,7 +90,21 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $this->validate($request,[
+        "name" => "required",
+        "role" => "required",
+        "password" => "confirmed"
+
+      ]);
+      $admin = admin::find($id);
+      $admin->name = $request->name;
+      $admin->password = bcrypt($request->password);
+      $admin->status = $request->status;
+      $admin->phone ="000";
+      $admin->roles()->sync($request->role);
+      
+      $admin->save();
+      return redirect()->route('admin.admin.index')->with("messages","admin updated");
     }
 
     /**
